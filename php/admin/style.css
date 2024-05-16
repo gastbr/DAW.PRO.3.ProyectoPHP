@@ -1,0 +1,7 @@
+.alta_formInput {
+    margin: 1em 1em;
+}
+
+.alta_formInput > * {
+    display: block;
+}
