@@ -5,3 +5,11 @@
 .alta_formInput > * {
     display: block;
 }
+
+#acogida {
+    display: none;
+    position: relative;
+    left: 2rem;
+    border: 2px black outset;
+    background-color: #eee;
+}

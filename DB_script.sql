@@ -2,19 +2,6 @@ drop database if exists albergue;
 create database albergue;
 use albergue;
 
-CREATE TABLE mascota (
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    Nombre VARCHAR(15) NOT NULL,
-    Raza VARCHAR(15) NOT NULL,
-    Tamanio ENUM('Grande', 'Pequeño', 'Mediano') NOT NULL,
-    FechaEntrada DATE NOT NULL,
-    FechaSalida DATE,
-    FechaNacimiento DATE,
-    Sexo ENUM('Macho', 'Hembra') NOT NULL,
-    Foto VARCHAR(255),
-    Descripcion VARCHAR(255)
-);
-
 CREATE TABLE usuario (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Username VARCHAR(15) NOT NULL UNIQUE,
@@ -31,14 +18,33 @@ CREATE TABLE anfitrion (
     Telefono CHAR(9) NOT NULL,
     Direccion VARCHAR(255) NOT NULL,
     Disponibilidad VARCHAR(15),
-    Mascota INT,
     Usuario INT,
     CONSTRAINT check_Anfitrion_DNI CHECK (DNI RLIKE '^[0-9]+[a-z]$'),
     CONSTRAINT check_Anfitrion_Telefono CHECK (Telefono RLIKE '^[0-9]$'),
-    CONSTRAINT FK_Anfitrion_Mascota FOREIGN KEY (Mascota)
-        REFERENCES Mascota (ID),
     CONSTRAINT FK_Anfitrion_Usuario FOREIGN KEY (Usuario)
         REFERENCES usuario(ID)
+);
+
+CREATE TABLE mascota (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(15) NOT NULL,
+    Raza VARCHAR(15) NOT NULL,
+    Tamanio ENUM('Grande', 'Pequeño', 'Mediano') NOT NULL,
+    FechaEntrada DATE NOT NULL,
+    FechaSalida DATE,
+    FechaNacimiento DATE,
+    Sexo ENUM('Macho', 'Hembra') NOT NULL,
+    Foto VARCHAR(255),
+    Descripcion VARCHAR(255)
+);
+
+CREATE TABLE anfitrion_acoge_mascota (
+    Anfitrion CHAR(9),
+    Mascota INT,
+    CONSTRAINT FK_acoge_anfitrion FOREIGN KEY (anfitrion)
+        REFERENCES anfitrion (DNI),
+    CONSTRAINT FK_acoge_mascota FOREIGN KEY (mascota)
+        REFERENCES mascota (ID)
 );
 
 CREATE TABLE Visita (
@@ -51,9 +57,16 @@ CREATE TABLE Visita (
     TelefonoVisitante CHAR(9) NOT NULL,
     EmailVisitante VARCHAR(30) NOT NULL,
     Comentarios VARCHAR(100),
-    CONSTRAINT check_Visita_Telefono CHECK (TelefonoVisitante RLIKE '^[0-9]$'),
-    CONSTRAINT FK_Visita_Anfitrion FOREIGN KEY (Anfitrion)
-        REFERENCES Anfitrion (DNI)
+    CONSTRAINT check_Visita_Telefono CHECK (TelefonoVisitante RLIKE '^[0-9]$')
+);
+
+CREATE TABLE anfitrion_recibe_visita (
+    anfitrion CHAR(9),
+    visita INT,
+    CONSTRAINT FK_recibe_anfitrion FOREIGN KEY (anfitrion)
+        REFERENCES anfitrion (DNI),
+    CONSTRAINT FK_recibe_visita FOREIGN KEY (visita)
+        REFERENCES visita (ID)
 );
 
 CREATE TABLE voluntario (

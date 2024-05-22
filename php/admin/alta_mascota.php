@@ -1,9 +1,10 @@
 <?php
 include '../inc/func.inc.php';
+include '../inc/mysql.inc.php';
 HeadHTML();
 ?>
 
-<form action="alta_mascota.php" method="post">
+<form action="alta_mascota.php&opcion=alta_mascota method="post" enctype="multipart/form-data">
 
     <div class="alta_formInput">
         <label for="nombre">Nombre:</label>
@@ -45,14 +46,21 @@ HeadHTML();
 
     <div class="alta_formInput">
         <label for="localizacion">Localización:</label>
-        <label><input type="radio" name="localizacion" value="albergue">Albergue</label>
-        <label onclick="document.getElementById('direc').style.display='block'"><input type="radio" name="localizacion" value="acogida">Acogida</label>
+        <label onclick="document.getElementById('acogida').style.display='none'"><input type="radio" name="localizacion" value="albergue"> Albergue</label>
+        <label onclick="document.getElementById('acogida').style.display='inline-block'"><input type="radio"
+                name="localizacion" value="acogida"> Acogida</label>
     </div>
-    <span id="direc" style="display:none">daksjdlkasjdlkajslkdajs</span>
+
+    <div id="acogida">
+        <div class="alta_formInput">
+            <label for="dni_acogida">DNI del anfitrión:</label>
+            <input type="text" name="dni_acogida">
+        </div>
+    </div>
 
     <div class="alta_formInput">
         <label for="descripcion">Descripción:</label><br>
-        <textarea name="descripcion" rows="4" cols="30"></textarea>
+        <textarea name="descripcion" rows="4" cols="50"></textarea>
     </div>
 
     <div class="alta_formInput">
@@ -61,9 +69,6 @@ HeadHTML();
     </div>
 
     <button type="submit" name="submit">Registrar mascota</button>
-
-
-
 </form>
 
 <?php
