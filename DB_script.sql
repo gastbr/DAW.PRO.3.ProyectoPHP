@@ -27,7 +27,7 @@ CREATE TABLE anfitrion (
 
 CREATE TABLE mascota (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    Nombre VARCHAR(15) NOT NULL,
+    Nombre VARCHAR(15) NOT NULL UNIQUE,
     Raza VARCHAR(15) NOT NULL,
     Tamanio ENUM('Grande', 'Pequeño', 'Mediano') NOT NULL,
     FechaEntrada DATE NOT NULL,

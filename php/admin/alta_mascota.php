@@ -2,9 +2,12 @@
 include '../inc/func.inc.php';
 include '../inc/mysql.inc.php';
 HeadHTML();
-?>
+if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
+    ?>
+    <div class="alert alert-success">Mascota añadida con éxito a la base de datos.</div>
+<?php } ?>
 
-<form action="alta_mascota.php&opcion=alta_mascota method="post" enctype="multipart/form-data">
+<form action="alta_mascota.php?opcion=alta_mascota" method="post" enctype="multipart/form-data">
 
     <div class="alta_formInput">
         <label for="nombre">Nombre:</label>
@@ -46,8 +49,9 @@ HeadHTML();
 
     <div class="alta_formInput">
         <label for="localizacion">Localización:</label>
-        <label onclick="document.getElementById('acogida').style.display='none'"><input type="radio" name="localizacion" value="albergue"> Albergue</label>
-        <label onclick="document.getElementById('acogida').style.display='inline-block'"><input type="radio"
+        <label onclick="document.getElementById('acogida').style.display='none'; document.getElementById('acogida').required = false;"><input type="radio" name="localizacion"
+                value="albergue"> Albergue</label>
+        <label onclick="document.getElementById('acogida').style.display='inline-block'; document.getElementById('acogida').required = true"><input type="radio"
                 name="localizacion" value="acogida"> Acogida</label>
     </div>
 
