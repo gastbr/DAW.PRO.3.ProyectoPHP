@@ -3,20 +3,21 @@ include '../inc/func.inc.php';
 include '../inc/mysql.inc.php';
 HeadHTML();
 if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
-    ?>
+?>
     <div class="alert alert-success">Mascota añadida con éxito a la base de datos.</div>
 <?php } ?>
 
 <form action="alta_mascota.php?opcion=alta_mascota" method="post" enctype="multipart/form-data">
-
+    <h2>Alta nuevo ingreso</h2>
     <div class="alta_formInput">
         <label for="nombre">Nombre:</label>
-        <input name="nombre" type="text">
+        <input required name="nombre" type="text">
     </div>
 
     <div class="alta_formInput">
         <label for="raza">Raza:</label>
-        <select name="raza">
+        <select required name="raza">
+            <option value="" disabled selected>Selecciona raza</option>
             <option value="pAleman">Pastor Alemán</option>
             <option value="chihuahua">Chihuahua</option>
             <option value="bardino">Bardino</option>
@@ -29,7 +30,8 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
 
     <div class="alta_formInput">
         <label for="tamanio">Tamaño:</label>
-        <select name="tamanio">
+        <select required name="tamanio">
+            <option value="" disabled selected>Selecciona tamaño</option>
             <option value="peq">Pequeño</option>
             <option value="med">Mediano</option>
             <option value="gr">Grande</option>
@@ -38,21 +40,19 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
 
     <div class="alta_formInput">
         <label for="nacimiento">Fecha de nacimiento:</label>
-        <input name="nacimiento" type="date">
+        <input required name="nacimiento" type="date">
     </div>
 
     <div class="alta_formInput">
         <label for="sexo">Sexo:</label>
-        <label><input type="radio" name="sexo" value="hembra"> Hembra</label>
+        <label><input required type="radio" name="sexo" value="hembra"> Hembra</label>
         <label><input type="radio" name="sexo" value="macho"> Macho</label>
     </div>
 
     <div class="alta_formInput">
         <label for="localizacion">Localización:</label>
-        <label onclick="document.getElementById('acogida').style.display='none'; document.getElementById('acogida').required = false;"><input type="radio" name="localizacion"
-                value="albergue"> Albergue</label>
-        <label onclick="document.getElementById('acogida').style.display='inline-block'; document.getElementById('acogida').required = true"><input type="radio"
-                name="localizacion" value="acogida"> Acogida</label>
+        <label onclick="document.getElementById('acogida').style.display='none'; document.querySelector('#acogida input').required = false;"><input required type="radio" name="localizacion" value="albergue"> Albergue</label>
+        <label onclick="document.getElementById('acogida').style.display='inline-block'; document.querySelector('#acogida input').required = true;"><input type="radio" name="localizacion" value="acogida"> Acogida</label>
     </div>
 
     <div id="acogida">
@@ -63,16 +63,17 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
     </div>
 
     <div class="alta_formInput">
-        <label for="descripcion">Descripción:</label><br>
+        <label for="descripcion">Descripción (opcional):</label><br>
         <textarea name="descripcion" rows="4" cols="50"></textarea>
     </div>
 
     <div class="alta_formInput">
-        <label for="foto">Foto</label>
+        <label for="foto">Foto (opcional)</label>
         <input type="file" name="foto">
     </div>
 
-    <button type="submit" name="submit">Registrar mascota</button>
+    <a href="inicio_admin.php" class="btn btn-outline-secondary">Volver</a>
+    <button class="btn btn-success" type="submit" name="submit">Registrar mascota</button>
 </form>
 
 <?php

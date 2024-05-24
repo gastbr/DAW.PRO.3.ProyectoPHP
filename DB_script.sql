@@ -20,7 +20,7 @@ CREATE TABLE anfitrion (
     Disponibilidad VARCHAR(15),
     Usuario INT,
     CONSTRAINT check_Anfitrion_DNI CHECK (DNI RLIKE '^[0-9]+[a-z]$'),
-    CONSTRAINT check_Anfitrion_Telefono CHECK (Telefono RLIKE '^[0-9]$'),
+    CONSTRAINT check_Anfitrion_Telefono CHECK (Telefono RLIKE '^[0-9]{9}$'),
     CONSTRAINT FK_Anfitrion_Usuario FOREIGN KEY (Usuario)
         REFERENCES usuario(ID)
 );
@@ -57,7 +57,7 @@ CREATE TABLE Visita (
     TelefonoVisitante CHAR(9) NOT NULL,
     EmailVisitante VARCHAR(30) NOT NULL,
     Comentarios VARCHAR(100),
-    CONSTRAINT check_Visita_Telefono CHECK (TelefonoVisitante RLIKE '^[0-9]$')
+    CONSTRAINT check_Visita_Telefono CHECK (TelefonoVisitante RLIKE '^[0-9]{9}$')
 );
 
 CREATE TABLE anfitrion_recibe_visita (
@@ -77,7 +77,7 @@ CREATE TABLE voluntario (
     Telefono CHAR(9) NOT NULL,
     Disponibilidad VARCHAR(15),
     CONSTRAINT check_Voluntario_DNI CHECK (DNI RLIKE '^[0-9]+[a-z]$'),
-    CONSTRAINT check_Voluntario_Telefono CHECK (Telefono RLIKE '^[0-9]$')
+    CONSTRAINT check_Voluntario_Telefono CHECK (Telefono RLIKE '^[0-9]{9}$')
 );
 
 CREATE TABLE tarea (

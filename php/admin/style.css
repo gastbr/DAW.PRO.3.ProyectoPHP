@@ -2,8 +2,13 @@
     margin: 1em 1em;
 }
 
-.alta_formInput > * {
+.alta_formInput>* {
     display: block;
+}
+
+.checkbox {
+    display: inline-block;
+    margin-right: 10px;
 }
 
 #acogida {
@@ -12,4 +17,13 @@
     left: 2rem;
     border: 2px black outset;
     background-color: #eee;
+}
+
+form {
+    background-color: #ecedf5;
+    display: inline block;
+    max-width: 500px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px #7c809e solid;
 }
