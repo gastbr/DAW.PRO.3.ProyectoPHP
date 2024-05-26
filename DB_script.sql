@@ -3,8 +3,7 @@ create database albergue;
 use albergue;
 
 CREATE TABLE usuario (
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    Username VARCHAR(15) NOT NULL UNIQUE,
+    Username VARCHAR(15) PRIMARY KEY,
     Email VARCHAR(30) NOT NULL UNIQUE,
     Pass VARCHAR(30) NOT NULL,
     Tipo ENUM('Coordinador', 'Anfitrión')
@@ -17,12 +16,12 @@ CREATE TABLE anfitrion (
     Apellido2 VARCHAR(15),
     Telefono CHAR(9) NOT NULL,
     Direccion VARCHAR(255) NOT NULL,
-    Disponibilidad VARCHAR(15),
-    Usuario INT,
+    Disponibilidad VARCHAR(100),
+    Usuario VARCHAR(15),
     CONSTRAINT check_Anfitrion_DNI CHECK (DNI RLIKE '^[0-9]+[a-z]$'),
     CONSTRAINT check_Anfitrion_Telefono CHECK (Telefono RLIKE '^[0-9]{9}$'),
     CONSTRAINT FK_Anfitrion_Usuario FOREIGN KEY (Usuario)
-        REFERENCES usuario(ID)
+        REFERENCES usuario(Username)
 );
 
 CREATE TABLE mascota (
@@ -34,13 +33,14 @@ CREATE TABLE mascota (
     FechaSalida DATE,
     FechaNacimiento DATE,
     Sexo ENUM('Macho', 'Hembra') NOT NULL,
+    Localizacion ENUM('albergue','acogida') NOT NULL,
     Foto VARCHAR(255),
     Descripcion VARCHAR(255)
 );
 
 CREATE TABLE anfitrion_acoge_mascota (
+    Mascota INT primary key,
     Anfitrion CHAR(9),
-    Mascota INT,
     CONSTRAINT FK_acoge_anfitrion FOREIGN KEY (anfitrion)
         REFERENCES anfitrion (DNI),
     CONSTRAINT FK_acoge_mascota FOREIGN KEY (mascota)

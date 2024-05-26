@@ -5,7 +5,14 @@ HeadHTML();
 if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
 ?>
     <div class="alert alert-success">Mascota añadida con éxito a la base de datos.</div>
+<?php }
+
+if (isset($_GET["opcion"]) && $_GET["opcion"] == "anfitrion_notfound") {
+?>
+    <div class="alert alert-warning">Anfitrión no encontrado. Introduzca un DNI registrado o registre uno nuevo.</div>
 <?php } ?>
+
+<a href="inicio_admin.php" class="btn btn-outline-secondary">Volver</a>
 
 <form action="alta_mascota.php?opcion=alta_mascota" method="post" enctype="multipart/form-data">
     <h2>Alta nuevo ingreso</h2>
@@ -58,7 +65,8 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
     <div id="acogida">
         <div class="alta_formInput">
             <label for="dni_acogida">DNI del anfitrión:</label>
-            <input type="text" name="dni_acogida">
+            <input type="text" name="dni_acogida" pattern="^[0-9]{8}[A-Za-z]{1}$">
+            <a href="./alta_anfitrion.php" class="btn btn-sm btn-secondary mt-2">Crear anfitrión</a>
         </div>
     </div>
 
