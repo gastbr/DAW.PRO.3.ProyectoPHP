@@ -101,3 +101,6 @@ CREATE TABLE donacion (
     NombreDonante VARCHAR(40),
     Importe DECIMAL(7 , 2 ) UNSIGNED
 );
+
+insert into albergue.usuario values("user","user@email.com","1234",2);
+insert into albergue.anfitrion values("78978978V","Nombre","Ape","Llido","654654654", "Direccion 123", "Completa", "user");

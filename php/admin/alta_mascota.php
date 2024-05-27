@@ -58,8 +58,8 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "anfitrion_notfound") {
 
     <div class="alta_formInput">
         <label for="localizacion">Localización:</label>
-        <label onclick="document.getElementById('acogida').style.display='none'; document.querySelector('#acogida input').required = false;"><input required type="radio" name="localizacion" value="albergue"> Albergue</label>
-        <label onclick="document.getElementById('acogida').style.display='inline-block'; document.querySelector('#acogida input').required = true;"><input type="radio" name="localizacion" value="acogida"> Acogida</label>
+        <label onclick="document.getElementById('acogida').style.display='none'; document.querySelector('#acogida input').required = false;"><input required type="radio" name="albergue" value="on"> Albergue</label>
+        <label onclick="document.getElementById('acogida').style.display='inline-block'; document.querySelector('#acogida input').required = true;"><input type="radio" name="acogida" value="on"> Acogida</label>
     </div>
 
     <div id="acogida">

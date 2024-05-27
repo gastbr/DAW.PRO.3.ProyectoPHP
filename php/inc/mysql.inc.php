@@ -18,20 +18,37 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_anfitrion") {
     $tel = $_POST["tel"];
     $dir = $_POST["dir"];
 
-    $aDispHora = $_POST["dispHora"][1];
-    $aDispDia = $_POST["dispDia"][1];
+    $disponibilidad = "-";
 
-    /*     
-    for ($i = 0; $i < count($aDispHora); $i++) {
-        $dispHora =$dispHora."-".$aDispHora[$i];
+    if (isset($_POST["Mañana"])) {
+        $disponibilidad = "Mañana-";
+    }
+    if (isset($_POST["Tarde"])) {
+        $disponibilidad = $disponibilidad . "Tarde-";
+    }
+    if (isset($_POST["L"])) {
+        $disponibilidad = $disponibilidad . "L-";
+    }
+    if (isset($_POST["M"])) {
+        $disponibilidad = $disponibilidad . "M-";
+    }
+    if (isset($_POST["X"])) {
+        $disponibilidad = $disponibilidad . "X-";
+    }
+    if (isset($_POST["J"])) {
+        $disponibilidad = $disponibilidad . "J-";
+    }
+    if (isset($_POST["V"])) {
+        $disponibilidad = $disponibilidad . "V-";
+    }
+    if (isset($_POST["S"])) {
+        $disponibilidad = $disponibilidad . "S-";
+    }
+    if (isset($_POST["D"])) {
+        $disponibilidad = $disponibilidad . "D-";
     }
 
-    for ($i = 0; $i < count($aDispDia); $i++) {
-        $dispDia = $dispDia."-".$aDispDia[$i];
-    }
-    */
-
-    $disponibilidad = $dispHora . "/" . $dispDia;
+    $disponibilidad = rtrim($disponibilidad, "-");
 
     $query = "INSERT INTO albergue.usuario VALUES (
         '$username',
@@ -62,15 +79,18 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_mascota") {
     $idAnfitrion = $_POST['dni_acogida'];
     $existeAnfitrion = "";
 
-    if (isset($_POST["localizacion"]) && $_POST["localizacion"] == "acogida") {
+    if (isset($_POST["acogida"])) {
         $query = "SELECT EXISTS(SELECT DNI FROM albergue.anfitrion WHERE DNI = '$idAnfitrion') as 'result';";
         $existeAnfitrion = $mysqli->query($query)->fetch_assoc()['result'];
+        $localizacion = "Acogida";
 
         if ($existeAnfitrion == 0) {
             echo "Anfitrion no existente.";
             header("Location: ../admin/alta_mascota.php?opcion=anfitrion_notfound");
             exit();
         }
+    } else if (isset($_POST["albergue"])) {
+        $localizacion = "Albergue";
     }
 
     // Alta mascota: guardar datos
