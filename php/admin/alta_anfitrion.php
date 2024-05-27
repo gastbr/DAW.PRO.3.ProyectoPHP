@@ -8,7 +8,7 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
     <div class="alert alert-success">Anfitrión añadido con éxito a la base de datos.</div>
 <?php } ?>
 
-<a href="inicio_admin.php" class="btn btn-outline-secondary">Volver</a>
+<a href="inicio_admin.php" class="btn btn-outline-secondary mt-2 mx-4">Volver</a>
 
 <form action="alta_anfitrion.php?opcion=alta_anfitrion" method="post">
     <h2>Alta nuevo anfitrión</h2>

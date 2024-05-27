@@ -2,17 +2,17 @@
 include '../inc/func.inc.php';
 include '../inc/mysql.inc.php';
 HeadHTML();
-if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
+if (isset($_GET["altaMascota"])) {
 ?>
-    <div class="alert alert-success">Mascota añadida con éxito a la base de datos.</div>
+    <div class="alert alert-success">Mascota <?php echo $_GET["altaMascota"]; ?> añadida con éxito a la base de datos.</div>
 <?php }
 
 if (isset($_GET["opcion"]) && $_GET["opcion"] == "anfitrion_notfound") {
 ?>
-    <div class="alert alert-warning">Anfitrión no encontrado. Introduzca un DNI registrado o registre uno nuevo.</div>
+    <div class="alert alert-warning">Anfitrión no encontrado. Introduzca un DNI registrado o <a href="./alta_anfitrion.php">registre uno nuevo</a>.</div>
 <?php } ?>
 
-<a href="inicio_admin.php" class="btn btn-outline-secondary">Volver</a>
+<a href="inicio_admin.php" class="btn btn-outline-secondary mt-2 mx-4">Volver</a>
 
 <form action="alta_mascota.php?opcion=alta_mascota" method="post" enctype="multipart/form-data">
     <h2>Alta nuevo ingreso</h2>
@@ -25,13 +25,13 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "anfitrion_notfound") {
         <label for="raza">Raza:</label>
         <select required name="raza">
             <option value="" disabled selected>Selecciona raza</option>
-            <option value="pAleman">Pastor Alemán</option>
-            <option value="chihuahua">Chihuahua</option>
-            <option value="bardino">Bardino</option>
-            <option value="labrador">Labrador</option>
-            <option value="pinscher">Pinscher</option>
-            <option value="golden">Golden Retriever</option>
-            <option value="pBelga">Pastor Belga</option>
+            <option value="Pastor Aleman">Pastor Alemán</option>
+            <option value="Chihuahua">Chihuahua</option>
+            <option value="Bardino">Bardino</option>
+            <option value="Labrador">Labrador</option>
+            <option value="Pinscher">Pinscher</option>
+            <option value="Golden Retriever">Golden Retriever</option>
+            <option value="Pastor Belga">Pastor Belga</option>
         </select>
     </div>
 
@@ -39,9 +39,9 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "anfitrion_notfound") {
         <label for="tamanio">Tamaño:</label>
         <select required name="tamanio">
             <option value="" disabled selected>Selecciona tamaño</option>
-            <option value="peq">Pequeño</option>
-            <option value="med">Mediano</option>
-            <option value="gr">Grande</option>
+            <option value="pequeño">Pequeño</option>
+            <option value="mediano">Mediano</option>
+            <option value="grande">Grande</option>
         </select>
     </div>
 

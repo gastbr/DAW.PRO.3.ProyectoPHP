@@ -27,13 +27,13 @@ CREATE TABLE anfitrion (
 CREATE TABLE mascota (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(15) NOT NULL UNIQUE,
-    Raza VARCHAR(15) NOT NULL,
+    Raza VARCHAR(20) NOT NULL,
     Tamanio ENUM('Grande', 'Pequeño', 'Mediano') NOT NULL,
-    FechaEntrada DATE NOT NULL,
+    FechaRegistro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FechaSalida DATE,
     FechaNacimiento DATE,
     Sexo ENUM('Macho', 'Hembra') NOT NULL,
-    Localizacion ENUM('albergue','acogida') NOT NULL,
+    Localizacion ENUM('albergue', 'acogida') NOT NULL,
     Foto VARCHAR(255),
     Descripcion VARCHAR(255)
 );

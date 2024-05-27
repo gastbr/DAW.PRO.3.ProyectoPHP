@@ -60,13 +60,13 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_anfitrion") {
 if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_mascota") {
     // Alta mascota: comprobar anfitrión
     $idAnfitrion = $_POST['dni_acogida'];
-    $result;
+    $existeAnfitrion = "";
 
     if (isset($_POST["localizacion"]) && $_POST["localizacion"] == "acogida") {
-        $query = "SELECT EXISTS(SELECT DNI FROM albergue.anfitrion WHERE DNI = '$idAnfitrion') as 'resultado';";
-        $result = $mysqli->query($query)->fetch_assoc();
+        $query = "SELECT EXISTS(SELECT DNI FROM albergue.anfitrion WHERE DNI = '$idAnfitrion') as 'result';";
+        $existeAnfitrion = $mysqli->query($query)->fetch_assoc()['result'];
 
-        if ($result['resultado'] == 0) {
+        if ($existeAnfitrion == 0) {
             echo "Anfitrion no existente.";
             header("Location: ../admin/alta_mascota.php?opcion=anfitrion_notfound");
             exit();
@@ -93,9 +93,7 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_mascota") {
         nullif('$descripcionMascota', ''));";
 
     $mysqli->query($query);
-
     $table = $mysqli->query("SELECT id FROM mascota where nombre = '$nombreMascota';");
-
     $idMascota = $table->fetch_assoc()['id'];
 
     // Alta mascota: guardar foto
@@ -119,7 +117,7 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_mascota") {
                     echo "Formato de archivo no válido.";
             }
             move_uploaded_file($fotoMascota['tmp_name'], "../../mediabd/$fileName");
-            $mysqli->query("UPDATE mascota SET foto = '../../mediabd/$fileName' WHERE id = $idMascota;");
+            $mysqli->query("UPDATE mascota SET foto = '$fileName' WHERE id = $idMascota;");
         } else {
             echo "Formato de archivo no válido.";
         }
@@ -127,11 +125,22 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_mascota") {
 
     // Alta mascota: insertar relacion con anfitrión
 
-    if (isset($_POST["localizacion"]) && $_POST["localizacion"] == "acogida" && $result['resultado'] == 1) {
-        $query = "INSERT INTO albergue.anfitrion_acoge_mascota VALUES ($idMascota, $idAnfitrion);";
+    if ($existeAnfitrion == 1) {
+        $query = "INSERT INTO albergue.anfitrion_acoge_mascota VALUES ($idMascota, '$idAnfitrion');";
         $mysqli->query($query);
     }
 
-    header("Location: ../admin/alta_mascota.php?opcion=alta_ok");
+    header("Location: ../admin/alta_mascota.php?altaMascota=$nombreMascota");
     exit();
 }
+
+// SELECT MASCOTAS
+
+if (isset($_GET["idMascota"])) {
+    $idMascota = $_GET["idMascota"];
+    $query = "SELECT * FROM albergue.mascota WHERE id=$idMascota;";
+} else {
+    $query = "SELECT * FROM albergue.mascota;";
+}
+
+$table = $mysqli->query($query);

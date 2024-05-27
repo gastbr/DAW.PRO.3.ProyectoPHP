@@ -1,5 +1,8 @@
+body {
+    background-color: #cacaca;
+}
+
 .card {
     width: 18rem;
-    display: inline-block;
-    margin: 10px;
+    height: 37.4em;
 }
