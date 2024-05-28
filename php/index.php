@@ -12,13 +12,13 @@ HeadHTML();
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $row["Nombre"] ?></h5>
                     <p class="card-text"><?php echo $row["Descripcion"] ?></p>
-                    <a href="./info_mascota.php?idMascota=<?php echo $row["ID"] ?>" class="btn btn-primary">Más información</a>
+                    <a href="./info_mascota.php?idMascota=<?php echo $row["ID"] ?>" class="btn btn-primary d-block position-relative">Más información</a>
                 </div>
             </div>
 
             <script>
                 if ("<?php echo $row["Foto"]; ?>" == "") {
-                    document.querySelector("#id<?php echo $row["ID"] ?> img").src = "../media/0.gif";
+                    document.querySelector("#id<?php echo $row["ID"] ?> img").src = "../media/0.jpg";
                 }
             </script>
 
