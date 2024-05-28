@@ -3,8 +3,8 @@ include '../inc/func.inc.php';
 include '../inc/mysql.inc.php';
 HeadHTML();
 if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
-    
-?>
+
+    ?>
     <div class="alert alert-success">Anfitrión añadido con éxito a la base de datos.</div>
 <?php } ?>
 
@@ -62,58 +62,60 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
 
     <h5>Disponibilidad:</h5>
     <div class="alta_formInput">
-        <div class="checkbox">
-            <input name="dispHora[]" type="checkbox" value="Mañana">
-            <label for="dispHora[]">Mañana </label>
+        <div class="checkboxDisponibilidad">
+            <input name="Mañana" type="checkbox" value="on">
+            <label for="Mañana">Mañana </label>
         </div>
 
-        <div class="checkbox">
-            <input name="dispHora[]" type="checkbox" value="Tarde">
-            <label for="dispHora[]">Tarde </label>
+        <div class="checkboxDisponibilidad">
+            <input name="Tarde" type="checkbox" value="on">
+            <label for="Tarde">Tarde </label>
         </div>
 
         <br>
         <span>-------------</span>
 
-        <div class="checkbox">
-            <input name="dispDia[]" type="checkbox" value="L">
-            <label for="dispDia[]">Lunes </label>
+        <div class="checkboxDisponibilidad">
+            <input name="L" type="checkbox" value="on">
+            <label for="L">Lunes </label>
         </div>
 
-        <div class="checkbox">
-            <input name="dispDia[]" type="checkbox" value="M">
-            <label for="dispDia[]">Martes </label>
+        <div class="checkboxDisponibilidad">
+            <input name="M" type="checkbox" value="on">
+            <label for="M">Martes </label>
         </div>
 
-        <div class="checkbox">
-            <input name="dispDia[]" type="checkbox" value="X">
-            <label for="dispDia[]">Miércoles </label>
+        <div class="checkboxDisponibilidad">
+            <input name="X" type="checkbox" value="on">
+            <label for="X">Miércoles </label>
         </div>
 
         <br>
 
-        <div class="checkbox">
-            <input name="dispDia[]" type="checkbox" value="J">
-            <label for="dispDia[]">Jueves </label>
+        <div class="checkboxDisponibilidad">
+            <input name="J" type="checkbox" value="on">
+            <label for="J">Jueves </label>
         </div>
 
-        <div class="checkbox">
-            <input name="dispDia[]" type="checkbox" value="V">
-            <label for="dispDia[]">Viernes </label>
+        <div class="checkboxDisponibilidad">
+            <input name="V" type="checkbox" value="on">
+            <label for="V">Viernes </label>
         </div>
 
-        <div class="checkbox">
-            <input name="dispDia[]" type="checkbox" value="S">
-            <label for="dispDia[]">Sábado </label>
+        <div class="checkboxDisponibilidad">
+            <input name="S" type="checkbox" value="on">
+            <label for="S">Sábado </label>
         </div>
 
-        <div class="checkbox">
-            <input name="dispDia[]" type="checkbox" value="D">
-            <label for="dispDia[]">Domingo </label>
+        <div class="checkboxDisponibilidad">
+            <input name="D" type="checkbox" value="on">
+            <label for="D">Domingo </label>
         </div>
 
-        <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block my-3" onclick="marcarTodo()"> Marcar todo</button>
-        <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block my-3" onclick="desmarcarTodo()"> Desmarcar todo</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block my-3" onclick="marcarTodo()">
+            Marcar todo</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm d-inline-block my-3" onclick="desmarcarTodo()">
+            Desmarcar todo</button>
 
     </div>
 
@@ -122,19 +124,21 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
 </form>
 
 <script>
+
     function marcarTodo() {
-        let checkboxes = document.querySelectorAll('.checkbox>input');
+        let checkboxes = document.querySelectorAll('.checkboxDisponibilidad>input');
         for (let i = 0; i < checkboxes.length; i++) {
             checkboxes[i].checked = true;
         }
     }
 
     function desmarcarTodo() {
-        let checkboxes = document.querySelectorAll('.checkbox>input');
+        let checkboxes = document.querySelectorAll('.checkboxDisponibilidad>input');
         for (let i = 0; i < checkboxes.length; i++) {
             checkboxes[i].checked = false;
         }
     }
+
 </script>
 
 <?php
