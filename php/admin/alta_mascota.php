@@ -32,6 +32,7 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "anfitrion_notfound") {
             <option value="Pinscher">Pinscher</option>
             <option value="Golden Retriever">Golden Retriever</option>
             <option value="Pastor Belga">Pastor Belga</option>
+            <option value="Mestizo">Mestizo</option>
         </select>
     </div>
 
@@ -58,14 +59,15 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "anfitrion_notfound") {
 
     <div class="alta_formInput">
         <label for="localizacion">Localización:</label>
-        <label onclick="document.getElementById('acogida').style.display='none'; document.querySelector('#acogida input').required = false;"><input required type="radio" name="albergue" value="on"> Albergue</label>
-        <label onclick="document.getElementById('acogida').style.display='inline-block'; document.querySelector('#acogida input').required = true;"><input type="radio" name="acogida" value="on"> Acogida</label>
+        <label onclick="document.getElementById('acogida').style.display='none'; document.querySelector('#acogida input').required = false;"><input required type="radio" name="localizacion" value="Albergue"> Albergue</label>
+        <label onclick="document.getElementById('acogida').style.display='inline-block'; document.querySelector('#acogida input').required = true;"><input type="radio" name="localizacion" value="Acogida"> Acogida</label>
     </div>
 
     <div id="acogida">
         <div class="alta_formInput">
-            <label for="dni_acogida">DNI del anfitrión:</label>
+            <label for="dni_acogida">DNI del anfitrión (existente):</label>
             <input type="text" name="dni_acogida" pattern="^[0-9]{8}[A-Za-z]{1}$">
+            <p class="pt-3">o crea un anfitrión nuevo:</p>
             <a href="./alta_anfitrion.php" class="btn btn-sm btn-secondary mt-2">Crear anfitrión</a>
         </div>
     </div>

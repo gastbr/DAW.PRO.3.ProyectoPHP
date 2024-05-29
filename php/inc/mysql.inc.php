@@ -5,7 +5,7 @@ if (!$mysqli) {
     die("No se pudo conectar a la BBDD: " . mysqli_connect_error());
 }
 
-// ALTA ANFITRIÓN
+#region ALTA ANFITRIÓN
 
 if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_anfitrion") {
     $email = $_POST["email"];
@@ -72,14 +72,14 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_anfitrion") {
     exit();
 }
 
-// ALTA MASCOTA
+#region ALTA MASCOTA
 
 if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_mascota") {
     // Alta mascota: comprobar anfitrión
     $idAnfitrion = $_POST['dni_acogida'];
     $existeAnfitrion = "";
 
-    if (isset($_POST["acogida"])) {
+    if (isset($_POST["localizacion"]) && $_POST["localizacion"] == "acogida") {
         $query = "SELECT EXISTS(SELECT DNI FROM albergue.anfitrion WHERE DNI = '$idAnfitrion') as 'result';";
         $existeAnfitrion = $mysqli->query($query)->fetch_assoc()['result'];
         $localizacion = "Acogida";
@@ -89,7 +89,7 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_mascota") {
             header("Location: ../admin/alta_mascota.php?opcion=anfitrion_notfound");
             exit();
         }
-    } else if (isset($_POST["albergue"])) {
+    } else if (isset($_POST["localizacion"]) && $_POST["localizacion"] == "albergue") {
         $localizacion = "Albergue";
     }
 
@@ -154,7 +154,7 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_mascota") {
     exit();
 }
 
-// SELECT MASCOTAS
+#region SELECT MASCOTAS
 
 if (isset($_GET["idMascota"])) {
     $idMascota = $_GET["idMascota"];

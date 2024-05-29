@@ -2,7 +2,22 @@ body {
     background-color: #cacaca;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .card {
     width: 18rem;
     height: 37.4em;
+}
+
+#login {
+    background-color: #ecedf5;
+    padding: 20px;
+    border: 1px #7c809e solid;
+}
+
+#login * {
+    display: block;
 }

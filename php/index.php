@@ -4,7 +4,7 @@ include 'inc/mysql.inc.php';
 HeadHTML();
 ?>
 <main>
-    <a href="./admin/inicio_admin.php" class="btn btn-success mt-2 mx-4">Admin login</a>
+    <a href="login.php" class="btn btn-success mt-2 mx-4">Admin login</a>
 
     <section class="container">
         
