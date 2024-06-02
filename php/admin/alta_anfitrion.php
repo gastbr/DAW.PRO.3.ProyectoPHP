@@ -8,7 +8,9 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
     <div class="alert alert-success">Anfitrión añadido con éxito a la base de datos.</div>
 <?php } ?>
 
-<a href="inicio_admin.php" class="btn btn-outline-secondary mt-2 mx-4">Volver</a>
+<main class="d-flex flex-column">
+
+<a href="inicio_admin.php"><button class="btn btn-outline-secondary mt-2 mx-4 d-inline">Volver</button></a>
 
 <form action="alta_anfitrion.php?opcion=alta_anfitrion" method="post">
     <h2>Alta nuevo anfitrión</h2>
@@ -20,12 +22,12 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
 
     <div class="alta_formInput">
         <label for="username">Usuario:</label>
-        <input required name="username" type="text" pattern="[0-9a-zA-Z?=!#$()_-]{2,15}">
+        <input required name="username" type="text" pattern="^[^&quot;^&#39;^=]{2,15}$">
     </div>
 
     <div class="alta_formInput">
         <label for="pass">Contraseña:</label>
-        <input required name="pass" type="password" pattern="[0-9a-zA-Z?=!#$()_-]{2,15}">
+        <input required name="pass" type="password" pattern="^[^&quot;^&#39;^=]{2,15}$">
     </div>
 
     <h5>Información personal</h5>
@@ -123,6 +125,7 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
     <button class="btn btn-success" type="submit" name="submit">Registrar anfitrión</button>
 </form>
 
+</main>
 <script>
 
     function marcarTodo() {

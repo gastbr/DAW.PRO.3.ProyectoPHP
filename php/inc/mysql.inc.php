@@ -10,7 +10,7 @@ if (!$mysqli) {
 if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_anfitrion") {
     $email = $_POST["email"];
     $username = $_POST["username"];
-    $pass = $_POST["pass"];
+    $pass = md5($_POST["pass"]);
     $dni = $_POST["dni"];
     $nombre = $_POST["nombre"];
     $apellido1 = $_POST["apellido1"];

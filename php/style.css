@@ -2,9 +2,10 @@ body {
     background-color: #cacaca;
 }
 
-a {
-    color: inherit;
+.volver {
+    color: blue;
     text-decoration: none;
+    font-weight: 600;
 }
 
 .card {
