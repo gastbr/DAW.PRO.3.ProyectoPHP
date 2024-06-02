@@ -20,6 +20,7 @@ HeadHTML();
                 </div>
             </div>
 
+            
             <script>
                 if ("<?php echo $row["Foto"]; ?>" == "") {
                     document.querySelector("#id<?php echo $row["ID"] ?> img").src = "../media/0.jpg";
