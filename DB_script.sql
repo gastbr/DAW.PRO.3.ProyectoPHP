@@ -5,7 +5,7 @@ use albergue;
 CREATE TABLE usuario (
     Username VARCHAR(15) PRIMARY KEY,
     Email VARCHAR(30) NOT NULL UNIQUE,
-    Pass VARCHAR(30) NOT NULL,
+    Pass VARCHAR(255) NOT NULL,
     Tipo ENUM('Coordinador', 'Anfitrión')
 );
 
@@ -102,8 +102,8 @@ CREATE TABLE donacion (
     Importe DECIMAL(7 , 2 ) UNSIGNED
 );
 
-insert into albergue.usuario values ('usuario','correo@email.com','1234',2);
-insert into albergue.usuario values ('admin','admin@email.com','1234',1);
+insert into albergue.usuario values ('usuario','correo@email.com',md5('1234'),2);
+insert into albergue.usuario values ('admin','admin@email.com',md5('1234'),1);
 insert into albergue.anfitrion values ('78599964V','Nombre','Apellido1','Apellido2','654654654','Calle Falsa 123','Por las tardes','usuario');
 
 INSERT INTO `mascota` VALUES
