@@ -154,6 +154,26 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_mascota") {
     exit();
 }
 
+#region BUSCADOR
+
+if (isset($_GET['busca']) && $_GET['busca'] == 'mascota') {
+    $buscar = trim($_POST['buscar']);
+    if ($buscar == "") {
+        $query = "SELECT * FROM albergue.mascota;";
+    } else {
+        $query = "SELECT * from albergue.mascota where id = '$buscar' OR nombre LIKE '%$buscar%'";
+    }
+}
+
+if (isset($_GET['busca']) && $_GET['busca'] == 'anfitrion') {
+    $buscar = trim($_POST['buscar']);
+    if ($buscar == "") {
+        $query = "SELECT * FROM albergue.anfitrion;";
+    } else {
+        $query = "SELECT * from albergue.anfitrion where DNI = '$buscar' OR nombre LIKE '%$buscar%' OR apellido1 LIKE '%$buscar%' OR apellido2 LIKE '%$buscar%'";
+    }
+}
+
 #region SELECT MASCOTAS
 
 if (isset($_GET["idMascota"])) {
