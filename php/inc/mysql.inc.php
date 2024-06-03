@@ -156,22 +156,24 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_mascota") {
 
 #region BUSCADOR
 
-if (isset($_GET['busca']) && $_GET['busca'] == 'mascota') {
+if (isset($_GET['busca']) && $_GET['busca'] == 'mascota' && isset($_POST['buscar'])) {
     $buscar = trim($_POST['buscar']);
     if ($buscar == "") {
         $query = "SELECT * FROM albergue.mascota;";
-    } else {
+    } else if ($buscar != "") {
         $query = "SELECT * from albergue.mascota where id = '$buscar' OR nombre LIKE '%$buscar%'";
     }
+    $table = $mysqli->query($query);
 }
 
-if (isset($_GET['busca']) && $_GET['busca'] == 'anfitrion') {
+if (isset($_GET['busca']) && $_GET['busca'] == 'anfitrion' && isset($_POST['buscar'])) {
     $buscar = trim($_POST['buscar']);
     if ($buscar == "") {
         $query = "SELECT * FROM albergue.anfitrion;";
-    } else {
+    } else if ($buscar != "") {
         $query = "SELECT * from albergue.anfitrion where DNI = '$buscar' OR nombre LIKE '%$buscar%' OR apellido1 LIKE '%$buscar%' OR apellido2 LIKE '%$buscar%'";
     }
+    $table = $mysqli->query($query);
 }
 
 #region SELECT MASCOTAS
@@ -179,8 +181,5 @@ if (isset($_GET['busca']) && $_GET['busca'] == 'anfitrion') {
 if (isset($_GET["idMascota"])) {
     $idMascota = $_GET["idMascota"];
     $query = "SELECT * FROM albergue.mascota WHERE id=$idMascota;";
-} else {
-    $query = "SELECT * FROM albergue.mascota;";
+    $table = $mysqli->query($query);
 }
-
-$table = $mysqli->query($query);

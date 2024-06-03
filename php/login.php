@@ -3,6 +3,8 @@ session_start();
 include 'inc/func.inc.php';
 include 'inc/mysql.inc.php';
 HeadHTML();
+$query = "SELECT * FROM albergue.mascota;";
+$table = $mysqli->query($query);
 $infoMascota = $table->fetch_assoc();
 
 if (isset($_SESSION['user'])) {
@@ -37,11 +39,11 @@ if (isset($_SESSION['user'])) {
 
 <?php
 if (isset($_GET['login']) && $_GET['login'] == 'fail') {
-?>
+    ?>
     <script>
         document.querySelector(".alert").classList.replace("d-none", "d-block");
     </script>
-<?php
+    <?php
 }
 FooterHTML();
 ?>

@@ -15,12 +15,16 @@ session_start();
 
     <div class="d-block">
         <form action="inicio_admin.php?busca=mascota" method="post">
-            <input type="text" name="buscar" placeholder="Firulais"><button class="mx-3" type="submit">Buscar mascota</button>
-            <span class="d-block mt-2">Introducir nombre o ID de mascota.<br>Dejar vacío para ver todos los registros.</span>
+            <input type="text" name="buscar" placeholder="Firulais"><button class="mx-3" type="submit">Buscar
+                mascota</button>
+            <span class="d-block mt-2">Introducir nombre o ID de mascota.<br>Dejar vacío para ver todos los
+                registros.</span>
         </form>
         <form action="inicio_admin.php?busca=anfitrion" method="post">
-            <input type="text" name="buscar" placeholder="12345678E"><button class="mx-3" type="submit">Buscar anfitrión</button>
-            <span class="d-block mt-2">Introducir nombre o DNI de anfitrión.<br>Dejar vacío para ver todos los registros.</span>
+            <input type="text" name="buscar" placeholder="12345678E"><button class="mx-3" type="submit">Buscar
+                anfitrión</button>
+            <span class="d-block mt-2">Introducir nombre o DNI de anfitrión.<br>Dejar vacío para ver todos los
+                registros.</span>
         </form>
     </div>
 
@@ -39,24 +43,28 @@ session_start();
             <?php
             if (isset($_GET['busca']) && $_GET['busca'] == 'mascota' && $table->num_rows > 0) {
                 while ($row = $table->fetch_assoc()) {
-            ?>
+                    ?>
                     <tr>
                         <th scope="row"><?php echo $row['ID']; ?></th>
                         <td><?php echo $row['Nombre']; ?></td>
                         <td><?php echo $row['Raza']; ?></td>
                         <td class="fecha"><?php echo $row['FechaNacimiento']; ?></td>
                         <td class="d-flex justify-content-end">
-                            <a href="./info_mascota_admin.php?id=<?php echo $row['ID']; ?>"><button type="button" class="btn btn-primary btn-sm mx-1">Ver ficha completa</button></a>
-                            <a href="./info_mascota_admin.php?opcion=editar&id=<?php echo $row['ID']; ?>"><button type="button" class="btn btn-success btn-sm mx-1">Editar</button></a>
-                            <a href="./confirmar_baja.php?tipo=mascota&id=<?php echo $row['ID']; ?>"><button type="button" class="btn btn-danger btn-sm mx-1">Baja</button></a>
+                            <a href="./info_mascota_admin.php?id=<?php echo $row['ID']; ?>"><button type="button"
+                                    class="btn btn-primary btn-sm mx-1">Ver ficha completa</button></a>
+                            <a href="./info_mascota_admin.php?opcion=editar&id=<?php echo $row['ID']; ?>"><button type="button"
+                                    class="btn btn-success btn-sm mx-1">Editar</button></a>
+                            <a href="./confirmar_baja.php?tipo=mascota&id=<?php echo $row['ID']; ?>"><button type="button"
+                                    class="btn btn-danger btn-sm mx-1">Baja</button></a>
                         </td>
                     </tr>
-            <?php
+                    <?php
                 }
             }
             ?>
             <tr>
-                <td colspan="5"><a href="inicio_admin.php"><button class="my-2 w-100 btn btn-sm btn-outline-secondary">Limpiar tabla</button></a></td>
+                <td colspan="5"><a href="inicio_admin.php"><button
+                            class="my-2 w-100 btn btn-sm btn-outline-secondary">Limpiar tabla</button></a></td>
             </tr>
         </tbody>
     </table>
@@ -75,38 +83,35 @@ session_start();
 
             <?php
 
-            if (isset($_GET['busca']) && $_GET['busca'] == 'mascota' && $table->num_rows > 0) {
+            if (isset($_GET['busca']) && $_GET['busca'] == 'anfitrion' && $table->num_rows > 0) {
                 while ($row = $table->fetch_assoc()) {
-            ?>
+                    ?>
                     <tr>
                         <th scope="row"><?php echo $row['DNI']; ?></th>
-                        <td><?php echo $row['Nombre'] . " " . $row['apellido1'] . " " . $row['apellido2']; ?></td>
+                        <td><?php echo $row['Nombre'] . " " . $row['Apellido1'] . " " . $row['Apellido2']; ?></td>
                         <td><?php echo $row['Telefono']; ?></td>
                         <td><?php echo $row['Usuario']; ?></td>
                         <td class="d-flex justify-content-end">
-                            <a href="./info_anfitrion_admin.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-primary btn-sm mx-1">Ver ficha completa</button></a>
-                            <a href="./info_anfitrion_admin.php?opcion=editar&id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success btn-sm mx-1">Editar</button></a>
-                            <a href="./confirmar_baja.php?tipo=anfitrion&id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger btn-sm mx-1">Baja</button></a>
+                            <a href="./info_anfitrion_admin.php?id=<?php echo $row['DNI']; ?>"><button type="button"
+                                    class="btn btn-primary btn-sm mx-1">Ver ficha completa</button></a>
+                            <a href="./info_anfitrion_admin.php?opcion=editar&id=<?php echo $row['DNI']; ?>"><button
+                                    type="button" class="btn btn-success btn-sm mx-1">Editar</button></a>
+                            <a href="./confirmar_baja.php?tipo=anfitrion&id=<?php echo $row['DNI']; ?>"><button type="button"
+                                    class="btn btn-danger btn-sm mx-1">Baja</button></a>
                         </td>
                     </tr>
-                    <tr>
-                        <a href="inicio_admin.php"><button class="btn btn-sm btn-outline-secondary">Limpiar tabla</button></a>
-                    </tr>
-
-            <?php
+                    <?php
                 }
             }
             ?>
+
+            <tr>
+                <td colspan="5"><a href="inicio_admin.php"><button
+                            class="my-2 w-100 btn btn-sm btn-outline-secondary">Limpiar tabla</button></a></td>
+            </tr>
+
         </tbody>
     </table>
-
-    <?php
-    echo "<pre>";
-    $fetch = $table->fetch_all(MYSQLI_ASSOC);
-    print_r($fetch);
-    exit();
-    echo "</pre>";
-    ?>
 
 </main>
 
@@ -122,11 +127,11 @@ session_start();
     // Muestra las tablas de mascotas o anfitrión según sea necesario
     <?php if (isset($_GET['busca'])) {
         if ($_GET['busca'] == 'mascota') { ?>
-            document.getElementById('tablaMascota').classList.replace("d-none", "d-block");
+                            document.getElementById('tablaMascota').classList.replace("d-none", "d-block");
         <?php } else if ($_GET['busca'] == 'anfitrion') {
-        ?>
-            document.getElementById('tablaAnfitrion').classList.replace("d-none", "d-block");
-    <?php
+            ?>
+                                                document.getElementById('tablaAnfitrion').classList.replace("d-none", "d-block");
+                            <?php
         }
     } ?>
 </script>
