@@ -23,6 +23,8 @@ $infoMascota = $table->fetch_assoc();
                 <p class="bg-light p-1 d-inline-block"><?php echo $infoMascota["Raza"]; ?></p>
                 <h3>Fecha de nacimiento: </h3>
                 <p class="bg-light p-1 d-inline-block"><?php echo $infoMascota["FechaNacimiento"]; ?></p>
+                <h3>Edad: </h3>
+                <p id="edad" class="bg-light p-1 d-inline-block"></p>
                 <h3>Sexo: </h3>
                 <p class="bg-light p-1 d-inline-block"><?php echo $infoMascota["Sexo"]; ?></p>
                 <h3>Localización: </h3>
@@ -47,6 +49,10 @@ $infoMascota = $table->fetch_assoc();
     if ("<?php echo $infoMascota["Foto"]; ?>" == "") {
         document.querySelector(".img-fluid").src = "../media/0.jpg";
     }
+
+    // Calcular edad
+    let hoy = 
+    document.querySelector("#edad").textContent = Date.now(). - 
 
 </script>
 
