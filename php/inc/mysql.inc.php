@@ -170,6 +170,12 @@ if (isset($_GET['bajaMascota'])) {
     $mysqli->query($query);
 }
 
+if (isset($_GET['bajaAnfitrion'])) {
+    $id = $_GET['bajaAnfitrion'];
+    $query = "DELETE FROM albergue.anfitrion WHERE DNI = '$id'";
+    $mysqli->query($query);
+}
+
 #region BUSCADOR
 
 if (isset($_GET['busca']) && $_GET['busca'] == 'mascota' && isset($_POST['buscar'])) {

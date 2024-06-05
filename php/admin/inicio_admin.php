@@ -13,20 +13,19 @@ session_start();
         <a href="../inc/login.inc.php?session=logout" type="button" class="btn btn-danger">Cerrar la sesión</a>
     </div>
 
-    <span class="baja text-danger fw-bold d-none">Baja realizada con éxito: ID#<?php echo $_GET['bajaMascota']; ?></span>
+    <span class="bajaMascota text-danger fw-bold d-none">Baja realizada con éxito: ID#<?php echo $_GET['bajaMascota']; ?></span>
+    <span class="bajaAnfitrion text-danger fw-bold d-none">Baja realizada con éxito: DNI <?php echo $_GET['bajaAnfitrion']; ?></span>
+    <span class="d-block mt-2">Introducir nombre, DNI o ID.<br>Dejar <strong>vacío</strong> para ver todos los registros.</span>
 
     <div class="d-block">
         <form action="inicio_admin.php?busca=mascota" method="post">
             <input type="text" name="buscar" placeholder="Firulais"><button class="mx-3" type="submit">Buscar
                 mascota</button>
-            <span class="d-block mt-2">Introducir nombre o ID de mascota.<br>Dejar vacío para ver todos los
-                registros.</span>
+
         </form>
         <form action="inicio_admin.php?busca=anfitrion" method="post">
             <input type="text" name="buscar" placeholder="12345678E"><button class="mx-3" type="submit">Buscar
                 anfitrión</button>
-            <span class="d-block mt-2">Introducir nombre o DNI de anfitrión.<br>Dejar vacío para ver todos los
-                registros.</span>
         </form>
     </div>
 
@@ -58,7 +57,7 @@ session_start();
                         </td>
                     </tr>
 
-                    <!-- Modales -->
+                    <!-- Modales mascota -->
 
                     <div class="modal fade" id="modalMascotaInfo<?php echo $row['ID']; ?>" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
@@ -79,7 +78,9 @@ session_start();
                                     </ul>
                                 </div>
                                 <div class="modal-footer">
-                                    <li class="list-group-item">Fecha de registro: <strong><?php echo $row['FechaRegistro']; ?></strong></li>
+                                    <p>Fecha de registro: <strong><?php echo $row['FechaRegistro']; ?></strong></p>
+                                    <button type="button" class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#modalMascotaBaja<?php echo $row['ID']; ?>">Baja</button>
+                                    <button type="button" class="btn btn-success mx-1" data-bs-toggle="modal" data-bs-target="#modalMascotaEditar<?php echo $row['ID']; ?>">Editar</button>
                                 </div>
                             </div>
                         </div>
@@ -145,11 +146,56 @@ session_start();
                         <td><?php echo $row['Telefono']; ?></td>
                         <td><?php echo $row['Usuario']; ?></td>
                         <td class="d-flex justify-content-end">
-                            <a href="./info_anfitrion_admin.php?id=<?php echo $row['DNI']; ?>"><button type="button" class="btn btn-primary btn-sm mx-1">Ver ficha completa</button></a>
-                            <a href="./info_anfitrion_admin.php?opcion=editar&id=<?php echo $row['DNI']; ?>"><button type="button" class="btn btn-success btn-sm mx-1">Editar</button></a>
-                            <a href="./confirmar_baja.php?tipo=anfitrion&id=<?php echo $row['DNI']; ?>"><button type="button" class="btn btn-danger btn-sm mx-1">Baja</button></a>
+                            <button type="button" class="btn btn-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#modalAnfitrionInfo<?php echo $row['DNI']; ?>">Ver ficha completa</button>
+                            <button type="button" class="btn btn-success btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#modalAnfitrionEditar<?php echo $row['DNI']; ?>">Editar</button>
+                            <button type="button" class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#modalAnfitrionBaja<?php echo $row['DNI']; ?>">Baja</button>
                         </td>
                     </tr>
+
+                    <!-- Modales anfitrión -->
+
+                    <div class="modal fade" id="modalAnfitrionInfo<?php echo $row['DNI']; ?>" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5"><?php echo $row['Nombre'] . " " . $row['Apellido1'] . " " . $row['Apellido2']; ?> (DNI <?php echo $row['DNI']; ?>)</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <ul class="list-group my-4">
+                                        <li class="list-group-item">Teléfono: <strong><?php echo $row['Telefono']; ?></strong></li>
+                                        <li class="list-group-item">Dirección: <strong><?php echo $row['Direccion']; ?></strong></li>
+                                        <li class="list-group-item">Disponibilidad: <strong><?php echo $row['Disponibilidad']; ?></strong></li>
+                                        <li class="list-group-item">Usuario: <strong><?php echo $row['Usuario']; ?></strong></li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#modalAnfitrionBaja<?php echo $row['DNI']; ?>">Baja</button>
+                                    <button type="button" class="btn btn-success mx-1" data-bs-toggle="modal" data-bs-target="#modalAnfitrionEditar<?php echo $row['DNI']; ?>">Editar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalAnfitrionBaja<?php echo $row['DNI']; ?>" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5"><?php echo $row['Nombre'] . " " . $row['Apellido1'] . " " . $row['Apellido2']; ?> (DNI <?php echo $row['DNI']; ?>)</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>¿Seguro que quieres dar de baja a <strong><?php echo $row['Nombre'] . " " . $row['Apellido1'] . " " . $row['Apellido2']; ?> (DNI <?php echo $row['DNI']; ?>)</strong>?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <a href="inicio_admin.php?bajaAnfitrion=<?php echo $row['DNI']; ?>"><button type="button" class="btn btn-danger">Dar de baja</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fin modal -->
             <?php
                 }
             }
@@ -186,13 +232,20 @@ session_start();
 </script>
 
 <?php
-// Visualizar mensaje de sesión cerrada con éxito.
+// Visualizar mensaje de baja realizada con éxito.
 if (isset($_GET['bajaMascota'])) {
-    ?>
+?>
     <script>
-        document.querySelector('span').classList.replace("d-none", "d-inline");
+        document.querySelector('.bajaMascota').classList.replace("d-none", "d-inline");
     </script>
-    <?php
+<?php
+}
+if (isset($_GET['bajaAnfitrion'])) {
+?>
+    <script>
+        document.querySelector('.bajaAnfitrion').classList.replace("d-none", "d-inline");
+    </script>
+<?php
 }
 FooterHTML();
 ?>
