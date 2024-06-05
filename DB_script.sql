@@ -108,7 +108,7 @@ insert into albergue.usuario values ('usuario3','correo3@email.com',md5('1234'),
 insert into albergue.usuario values ('admin','admin@email.com',md5('1234'),1);
 insert into albergue.anfitrion values ('78599964V','Nombre','Apellido1','Apellido2','654654654','Calle Falsa 123','Por las tardes','usuario1');
 insert into albergue.anfitrion values ('78945612P','Manuel','Apel','Lido','654987545','Calle Real 987','Por las mañanas','usuario2');
-insert into albergue.anfitrion values ('32165487U','Ana','Maria','Ape','789456321','Calle Uno 654','Por las tardes','usuario3');
+insert into albergue.anfitrion values ('32165487U','Western','Digital','Messi','789456321','Calle Uno 654','Por las tardes','usuario3');
 
 INSERT INTO `mascota` VALUES
 (1,'Ambrosio','Labrador','Grande','2024-05-27 03:24:59',NULL,'2024-03-19','Macho','Albergue','fotoMascota-ID1.jpg','Descripción del bueno de Ambrosio.'),

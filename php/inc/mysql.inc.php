@@ -154,6 +154,22 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_mascota") {
     exit();
 }
 
+#region SELECT MASCOTAS
+
+if (isset($_GET["idMascota"])) {
+    $idMascota = $_GET["idMascota"];
+    $query = "SELECT * FROM albergue.mascota WHERE id=$idMascota;";
+    $table = $mysqli->query($query);
+}
+
+#region BAJAS
+
+if (isset($_GET['bajaMascota'])) {
+    $id = $_GET['bajaMascota'];
+    $query = "DELETE FROM albergue.mascota WHERE ID = '$id'";
+    $mysqli->query($query);
+}
+
 #region BUSCADOR
 
 if (isset($_GET['busca']) && $_GET['busca'] == 'mascota' && isset($_POST['buscar'])) {
@@ -173,13 +189,5 @@ if (isset($_GET['busca']) && $_GET['busca'] == 'anfitrion' && isset($_POST['busc
     } else if ($buscar != "") {
         $query = "SELECT * from albergue.anfitrion where DNI = '$buscar' OR nombre LIKE '%$buscar%' OR apellido1 LIKE '%$buscar%' OR apellido2 LIKE '%$buscar%'";
     }
-    $table = $mysqli->query($query);
-}
-
-#region SELECT MASCOTAS
-
-if (isset($_GET["idMascota"])) {
-    $idMascota = $_GET["idMascota"];
-    $query = "SELECT * FROM albergue.mascota WHERE id=$idMascota;";
     $table = $mysqli->query($query);
 }

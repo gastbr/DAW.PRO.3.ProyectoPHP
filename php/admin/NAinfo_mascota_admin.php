@@ -44,6 +44,8 @@ $infoMascota = $table->fetch_assoc();
     fecha = date.toLocaleDateString("es-ES");
     document.querySelectorAll("#info p")[1].textContent = fecha;
 
+
+    // Poner la imagen de "imagen no disponible" en las entradas sin foto
     if ("<?php echo $infoMascota["Foto"]; ?>" == "") {
         document.querySelector(".img-fluid").src = "../media/0.jpg";
     }
