@@ -45,9 +45,9 @@ if (isset($_SESSION['user'])) {
 
 <script>
     <?php
-    // Visualiza la alerta de login fail.
     if (isset($_GET['login']) && $_GET['login'] == 'fail') {
     ?>
+        // Visualiza la alerta de login fail.
         document.querySelector(".alert").classList.replace("d-none", "d-block");
     <?php
     } ?>
