@@ -16,7 +16,7 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "anfitrion_notfound") {
 
     <a href="inicio_admin.php"><button class="btn btn-outline-secondary mt-2 mx-4 d-inline">Volver</button></a>
 
-    <form action="alta_mascota.php?opcion=alta_mascota" method="post" enctype="multipart/form-data">
+    <form class="formulario" action="alta_mascota.php?mascota=alta" method="post" enctype="multipart/form-data">
         <h2>Alta nuevo ingreso</h2>
         <div class="alta_formInput">
             <label for="nombre">Nombre:</label>

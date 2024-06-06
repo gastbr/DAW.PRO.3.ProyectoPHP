@@ -12,7 +12,7 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_ok") {
 
 <a href="inicio_admin.php"><button class="btn btn-outline-secondary mt-2 mx-4 d-inline">Volver</button></a>
 
-<form action="alta_anfitrion.php?opcion=alta_anfitrion" method="post">
+<form class="formulario" action="alta_anfitrion.php?anfitrion=alta" method="post">
     <h2>Alta nuevo anfitrión</h2>
     <h5>Información de login</h5>
     <div class="alta_formInput">

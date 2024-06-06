@@ -105,10 +105,12 @@ CREATE TABLE donacion (
 insert into albergue.usuario values ('usuario1','correo1@email.com',md5('1234'),2);
 insert into albergue.usuario values ('usuario2','correo2@email.com',md5('1234'),2);
 insert into albergue.usuario values ('usuario3','correo3@email.com',md5('1234'),2);
+insert into albergue.usuario values ('usuarioPep','pepguar@email.com',md5('1234'),2);
 insert into albergue.usuario values ('admin','admin@email.com',md5('1234'),1);
-insert into albergue.anfitrion values ('78599964V','Nombre','Apellido1','Apellido2','654654654','Calle Falsa 123','Por las tardes','usuario1');
-insert into albergue.anfitrion values ('78945612P','Manuel','Apel','Lido','654987545','Calle Real 987','Por las mañanas','usuario2');
-insert into albergue.anfitrion values ('32165487U','Western','Digital','Messi','789456321','Calle Uno 654','Por las tardes','usuario3');
+insert into albergue.anfitrion values ('78599964V','Cristiano','Messi','Neymar', '712345689','Calle Falsa 123','Mañana-Tarde-L-M-X-J-V-S-D','usuario1');
+insert into albergue.anfitrion values ('78945612P','Lionel','Ronaldo','Jr.','654987545','Calle Real 987','Mañana-L-M-X-S-D','usuario2');
+insert into albergue.anfitrion values ('32165487U','Andrés','Iniesta','Ronaldinho','789456321','Calle Uno 654','Tarde-L-S-D','usuario3');
+insert into albergue.anfitrion values ('57845698P','Pep','Guardiola','Messi','684597541','Lololol 387','Tarde-L-D','usuarioPep');
 
 INSERT INTO `mascota` VALUES
 (1,'Ambrosio','Labrador','Grande','2024-05-27 03:24:59',NULL,'2024-03-19','Macho','Albergue','fotoMascota-ID1.jpg','Descripción del bueno de Ambrosio.'),
@@ -117,4 +119,6 @@ INSERT INTO `mascota` VALUES
 (4,'Mambo','Bardino','Mediano','2024-05-27 03:29:31',NULL,'2024-02-06','Macho','Albergue','fotoMascota-ID4.jpg','Mambo es muy inteligente.'),
 (5,'Trombón','Labrador','Grande','2024-05-27 03:30:12',NULL,'2023-05-27','Hembra','Albergue','fotoMascota-ID5.jpg','Trombón es muy buen chico.'),
 (6,'Maracaibo','Chihuahua','Pequeño','2024-05-27 03:31:02',NULL,'2022-05-27','Hembra','Albergue','fotoMascota-ID6.jpg','Maracaibo (en wayú: Marakaaya) es la ciudad capital del estado Zulia, ubicada en el noroeste de Venezuela. Fundada en 1529 por Ambrosio Alfinger como Nueva Núremberg (hispanización de Neu Nürnberg, en alemán) en homenaje a la ciudad alemana Núremberg. Es '),
-(7,'Quesito','Pastor Belga','Grande','2024-05-27 03:53:18',NULL,'2024-03-10','Hembra','Albergue',NULL,'Quesito es muy guapa, pero no tiene foto. Queríamos probar cómo se veía la web si no había foto.');
+(7,'Quesito','Pastor Belga','Grande','2024-05-27 03:53:18',NULL,'2024-03-10','Hembra','Acogida',NULL,'Quesito es muy guapa, pero no tiene foto. Queríamos probar cómo se veía la web si no había foto.');
+
+INSERT INTO albergue.anfitrion_acoge_mascota VALUES ('7', '78599964V');

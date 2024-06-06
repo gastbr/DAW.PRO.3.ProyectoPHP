@@ -5,9 +5,10 @@ if (!$mysqli) {
     die("No se pudo conectar a la BBDD: " . mysqli_connect_error());
 }
 
-#region ALTA ANFITRIÓN
+#region ANFITRIÓN
 
-if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_anfitrion") {
+if (isset($_GET["anfitrion"])) {
+
     $email = $_POST["email"];
     $username = $_POST["username"];
     $pass = md5($_POST["pass"]);
@@ -50,14 +51,16 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_anfitrion") {
 
     $disponibilidad = rtrim($disponibilidad, "-");
 
-    $query = "INSERT INTO albergue.usuario VALUES (
+    #region Alta
+    if ($_GET["anfitrion"] == "alta") {
+        $query = "INSERT INTO albergue.usuario VALUES (
         '$username',
         '$email',
         '$pass',
         'Anfitrión');";
-    $mysqli->query("$query");
+        $mysqli->query("$query");
 
-    $query = "INSERT INTO albergue.anfitrion VALUES (
+        $query = "INSERT INTO albergue.anfitrion VALUES (
         '$dni',
         '$nombre',
         '$apellido1',
@@ -66,20 +69,49 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_anfitrion") {
         '$dir',
         nullif('$disponibilidad', ''),
         '$username');";
-    $mysqli->query("$query");
 
-    header("Location: ../admin/alta_anfitrion.php?opcion=alta_ok");
+        $mysqli->query("$query");
+
+        header("Location: ../admin/alta_anfitrion.php?opcion=alta_ok");
+        exit();
+    }
+}
+
+#region MASCOTA
+
+if (isset($_GET["mascota"]) && $_GET["mascota"] == "editar") {
+
+    $nombreMascota = $_POST['nombre'];
+    $razaMascota = $_POST['raza'];
+    $tamanioMascota = $_POST['tamanio'];
+    $nacimientoMascota = $_POST['nacimiento'];
+    $sexoMascota = $_POST['sexo'];
+    $descripcionMascota = $_POST['descripcion'];
+    $id = $_POST['id'];
+
+    #region Edición
+
+    $query = "UPDATE albergue.mascota SET
+            Nombre = '$nombreMascota',
+            Raza = '$razaMascota',
+            Tamanio = '$tamanioMascota',
+            FechaNacimiento = '$nacimientoMascota',
+            Sexo = '$sexoMascota',
+            Descripcion = nullif('$descripcionMascota', '')
+        WHERE id = $id;";
+    $mysqli->query($query);
+    header("Location: ../admin/inicio_admin.php");
     exit();
 }
 
-#region ALTA MASCOTA
+#region Alta
 
-if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_mascota") {
+if (isset($_GET["mascota"]) && $_GET["mascota"] == "alta") {
     // Alta mascota: comprobar anfitrión
     $idAnfitrion = $_POST['dni_acogida'];
     $existeAnfitrion = "";
 
-    if (isset($_POST["localizacion"]) && $_POST["localizacion"] == "acogida") {
+    if (isset($_POST["localizacion"]) && $_POST["localizacion"] == "Acogida") {
         $query = "SELECT EXISTS(SELECT DNI FROM albergue.anfitrion WHERE DNI = '$idAnfitrion') as 'result';";
         $existeAnfitrion = $mysqli->query($query)->fetch_assoc()['result'];
         $localizacion = "Acogida";
@@ -89,7 +121,7 @@ if (isset($_GET["opcion"]) && $_GET["opcion"] == "alta_mascota") {
             header("Location: ../admin/alta_mascota.php?opcion=anfitrion_notfound");
             exit();
         }
-    } else if (isset($_POST["localizacion"]) && $_POST["localizacion"] == "albergue") {
+    } else if (isset($_POST["localizacion"]) && $_POST["localizacion"] == "Albergue") {
         $localizacion = "Albergue";
     }
 
@@ -160,6 +192,8 @@ if (isset($_GET["idMascota"])) {
     $idMascota = $_GET["idMascota"];
     $query = "SELECT * FROM albergue.mascota WHERE id=$idMascota;";
     $table = $mysqli->query($query);
+    $query = "SELECT * FROM albergue.anfitrion_acoge_mascota WHERE mascota=$idMascota;";
+    $tableAnfitrion = $mysqli->query($query);
 }
 
 #region BAJAS
