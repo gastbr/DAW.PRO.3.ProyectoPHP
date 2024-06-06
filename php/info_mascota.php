@@ -15,7 +15,7 @@ $infoAnfitrion = $tableAnfitrion->fetch_assoc();
 
         <div class="row bg-secondary p-5">
             <div class="col-12 col-lg-4">
-                <img class="img-fluid" src="../mediabd/<?php echo $infoMascota["Foto"] ?>" alt="Foto de <?php echo $infoMascota["Nombre"] ?>.">
+                <img class="img-fluid border border-dark rounded" src="../mediabd/<?php echo $infoMascota["Foto"] ?>" alt="Foto de <?php echo $infoMascota["Nombre"] ?>.">
             </div>
 
             <div id="info" class="col-12 col-lg-8">
