@@ -8,8 +8,14 @@ $table = $mysqli->query($query);
 $infoMascota = $table->fetch_assoc();
 
 if (isset($_SESSION['user'])) {
-    header("Location: admin/inicio_admin.php");
-    exit();
+
+    if ($_SESSION['admin']) {
+        header("Location: admin/inicio_admin.php");
+        exit();
+    } else {
+        header("Location: admin/inicio_anfitrion.php");
+        exit();
+    }
 }
 ?>
 
@@ -22,7 +28,7 @@ if (isset($_SESSION['user'])) {
             <h2 class="d-block">Login de usuarios</h2>
             <form action="./inc/login.inc.php?session=login" method="post">
                 <div class="user my-3 text-left">
-                    <label for="user">Usuario: (admin)</label>
+                    <label for="user">Usuario: (admin)(usuario1)</label>
                     <input class="w-100" type="text" name="user" required>
                 </div>
                 <div class="pass my-3">

@@ -3,6 +3,10 @@ include '../inc/func.inc.php';
 include '../inc/mysql.inc.php';
 HeadHTML();
 session_start();
+if (!$_SESSION['admin']) {
+    header("Location: ../index.php?session=denegado");
+    exit();
+}
 ?>
 <main class="container mt-2 mx-3">
     <h1 class="my-3">¡Bienvenido <?php echo $_SESSION['user']; ?>!</h1>

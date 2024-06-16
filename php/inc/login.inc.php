@@ -18,12 +18,26 @@ if (isset($_GET['session'])) {
         $table = $mysqli->query($query);
         $checkLogin = $table->fetch_all(MYSQLI_ASSOC)[0]['check'];
 
+        $query = "SELECT tipo FROM albergue.usuario WHERE username = '$user' AND pass = '$pass';";
+        $table = $mysqli->query($query);
+        $checkAdmin = $table->fetch_all(MYSQLI_ASSOC)[0]['tipo'];
+
         if (!$checkLogin) {
             header("Location: ../login.php?login=fail");
             exit();
-        } else if ($checkLogin) {
+        } else if ($checkLogin && $checkAdmin == 'Coordinador') {
             $_SESSION['user'] = $user;
+            $_SESSION['admin'] = true;
             header("Location: ../admin/inicio_admin.php");
+            exit();
+        } else if ($checkLogin && $checkAdmin == 'Anfitrión') {
+            $_SESSION['user'] = $user;
+            $_SESSION['admin'] = false;
+            header("Location: ../admin/inicio_anfitrion.php");
+            exit();
+        } else {
+            echo "Error de login.<br><br>login.inc.php";
+            exit();
         }
     }
 
