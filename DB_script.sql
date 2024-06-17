@@ -21,7 +21,7 @@ CREATE TABLE anfitrion (
     CONSTRAINT check_Anfitrion_DNI CHECK (DNI RLIKE '^[0-9]+[a-z]$'),
     CONSTRAINT check_Anfitrion_Telefono CHECK (Telefono RLIKE '^[0-9]{9}$'),
     CONSTRAINT FK_Anfitrion_Usuario FOREIGN KEY (Usuario)
-        REFERENCES usuario(Username)
+        REFERENCES usuario(Username) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE mascota (
@@ -42,9 +42,9 @@ CREATE TABLE anfitrion_acoge_mascota (
     Mascota INT primary key,
     Anfitrion CHAR(9),
     CONSTRAINT FK_acoge_anfitrion FOREIGN KEY (anfitrion)
-        REFERENCES anfitrion (DNI),
+        REFERENCES anfitrion (DNI) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT FK_acoge_mascota FOREIGN KEY (mascota)
-        REFERENCES mascota (ID)
+        REFERENCES mascota (ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Visita (
@@ -64,9 +64,9 @@ CREATE TABLE anfitrion_recibe_visita (
     anfitrion CHAR(9),
     visita INT,
     CONSTRAINT FK_recibe_anfitrion FOREIGN KEY (anfitrion)
-        REFERENCES anfitrion (DNI),
+        REFERENCES anfitrion (DNI) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT FK_recibe_visita FOREIGN KEY (visita)
-        REFERENCES visita (ID)
+        REFERENCES visita (ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE voluntario (
@@ -91,9 +91,9 @@ CREATE TABLE Voluntario_Realiza_Tarea (
     voluntario CHAR(9),
     HorasRealizadas TINYINT UNSIGNED,
     CONSTRAINT FK_Realiza_Tarea FOREIGN KEY (Tarea)
-        REFERENCES Tarea (ID),
+        REFERENCES Tarea (ID) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT FK_Realiza_Voluntario FOREIGN KEY (voluntario)
-        REFERENCES Voluntario (DNI)
+        REFERENCES Voluntario (DNI) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE donacion (

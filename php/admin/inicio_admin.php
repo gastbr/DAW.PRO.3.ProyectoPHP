@@ -1,9 +1,11 @@
 <?php
+session_start();
+$_SESSION['loc'] = "inicio_admin";
 include '../inc/func.inc.php';
 include '../inc/mysql.inc.php';
-session_start();
+
 HeadHTML();
-if (!$_SESSION['admin']) {
+if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
     header("Location: ../index.php?session=denegado");
     exit();
 }
@@ -11,7 +13,7 @@ if (!$_SESSION['admin']) {
 <main class="container mt-2 mx-3">
     <h1 class="my-3">¡Bienvenido <?php echo $_SESSION['user']; ?>!</h1>
     <div class="my-4">
-        <a href="../index.php" type="button" class="btn btn-outline-success">Ver lsitado público</a>
+        <a href="../index.php" type="button" class="btn btn-outline-success">Ver listado público</a>
         <a href="alta_anfitrion.php" type="button" class="btn btn-success">Alta de anfitriones</a>
         <a href="alta_mascota.php" type="button" class="btn btn-success">Alta de mascotas</a>
         <a href="../inc/login.inc.php?session=logout" type="button" class="btn btn-danger">Cerrar la sesión</a>
@@ -82,12 +84,14 @@ if (!$_SESSION['admin']) {
                             }
                         </script>
 
-                        <!-- Fin modal -->
             <?php
                     }
                 }
             }
             ?>
+            <tr>
+                <td colspan="5"><a href="inicio_admin.php?pdf=mascotas"><button class="my-2 w-100 btn btn-sm btn-outline-warning">Generar PDF</button></a></td>
+            </tr>
             <tr>
                 <td colspan="5"><a href="inicio_admin.php"><button class="my-2 w-100 btn btn-sm btn-outline-secondary">Limpiar tabla</button></a></td>
             </tr>
@@ -128,8 +132,12 @@ if (!$_SESSION['admin']) {
             <?php
                 }
             }
+
             ?>
 
+            <tr>
+                <td colspan="5"><a href="inicio_admin.php?pdf=anfitriones"><button class="my-2 w-100 btn btn-sm btn-outline-warning">Generar PDF</button></a></td>
+            </tr>
             <tr>
                 <td colspan="5"><a href="inicio_admin.php"><button class="my-2 w-100 btn btn-sm btn-outline-secondary">Limpiar tabla</button></a></td>
             </tr>

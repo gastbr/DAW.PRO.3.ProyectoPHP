@@ -1,0 +1,38 @@
+body {
+    background-color: #cacaca;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.alta_formInput {
+    margin: 1em 1em;
+}
+
+.alta_formInput>* {
+    display: block;
+}
+
+.checkboxDisponibilidad {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#acogida {
+    display: none;
+    position: relative;
+    left: 2rem;
+    border: 2px black outset;
+    background-color: #eee;
+}
+
+.formulario {
+    background-color: #ecedf5;
+    display: inline-block;
+    max-width: 500px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px #7c809e solid;
+}

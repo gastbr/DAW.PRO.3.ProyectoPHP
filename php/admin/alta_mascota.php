@@ -1,7 +1,13 @@
 <?php
+session_start();
+$_SESSION['loc'] = "alta_mascota";
 include '../inc/func.inc.php';
 include '../inc/mysql.inc.php';
 HeadHTML();
+if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
+    header("Location: ../index.php?session=denegado");
+    exit();
+}
 if (isset($_GET["altaMascota"])) {
 ?>
     <div class="alert alert-success">Mascota <?php echo $_GET["altaMascota"]; ?> añadida con éxito a la base de datos.</div>

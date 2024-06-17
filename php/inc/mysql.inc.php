@@ -1,5 +1,4 @@
 <?php
-
 $mysqli = new mysqli("localhost:3307", "root", "", "albergue");
 if (!$mysqli) {
     die("No se pudo conectar a la BBDD: " . mysqli_connect_error());
@@ -206,7 +205,14 @@ if (isset($_GET['bajaMascota'])) {
 
 if (isset($_GET['bajaAnfitrion'])) {
     $id = $_GET['bajaAnfitrion'];
-    $query = "DELETE FROM albergue.anfitrion WHERE DNI = '$id'";
+    $query = "SELECT usuario FROM albergue.anfitrion WHERE dni = '$id'";
+    $tabla = $mysqli->query($query);
+    $usuario = $tabla->fetch_all(MYSQLI_ASSOC)[0]['usuario'];
+
+    $query = "DELETE FROM albergue.anfitrion WHERE DNI = '$id';";
+    $mysqli->query($query);
+
+    $query = "DELETE FROM albergue.usuario WHERE username = '$usuario';";
     $mysqli->query($query);
 }
 
@@ -230,4 +236,97 @@ if (isset($_GET['busca']) && $_GET['busca'] == 'anfitrion' && isset($_POST['busc
         $query = "SELECT * from albergue.anfitrion where DNI = '$buscar' OR nombre LIKE '%$buscar%' OR apellido1 LIKE '%$buscar%' OR apellido2 LIKE '%$buscar%'";
     }
     $table = $mysqli->query($query);
+}
+
+#region inicio_anfitiron
+
+if (
+    isset($_SESSION['loc']) &&
+    $_SESSION['loc'] == 'inicio_anfitrion' &&
+    isset($_SESSION['admin']) &&
+    !$_SESSION['admin']
+) {
+
+    $user = $_SESSION['user'];
+
+    // Datos del anfitrion
+    $query = "SELECT * FROM albergue.anfitrion WHERE usuario = '$user'";
+    $tablaAnfitrion = $mysqli->query($query);
+    $rowAnfitrion = $tablaAnfitrion->fetch_all(MYSQLI_ASSOC)[0];
+
+    $dni = $rowAnfitrion['DNI'];
+
+    // Comprueba si tiene mascota
+    $query = "SELECT EXISTS(SELECT ANFITRION from albergue.anfitrion_acoge_mascota where anfitrion = '$dni') as 'tieneMascota';";
+    $tieneMascota = $mysqli->query($query)->fetch_all(MYSQLI_ASSOC)[0]['tieneMascota'];
+
+    // Datos de la mascota
+    if ($tieneMascota) {
+        $query = "SELECT * FROM albergue.mascota WHERE id = (SELECT mascota FROM albergue.anfitrion_acoge_mascota WHERE anfitrion = '$dni');";
+        $tablaMascota = $mysqli->query($query);
+    }
+}
+
+if (isset($_GET['pdf'])) {
+    if (!class_exists('FPDF')) {
+        require_once('../../fpdf186/fpdf.php');
+    }
+
+    $pdf = new FPDF();
+    $pdf->AddPage();
+    $pdf->SetTitle("Anfitriones");
+    $pdf->SetFont('Arial', 'B', 10);
+
+    if ($_GET['pdf'] == 'anfitriones') {
+        $pdf->Cell(20, 10, 'DNI', 1, 0, 'C');
+        // Header cell (width, height, text, border, line break, alignment)
+        $pdf->Cell(30, 10, 'Nombre', 1, 0, 'C');
+        $pdf->Cell(30, 10, 'Apellido1', 1, 0, 'C');
+        $pdf->Cell(30, 10, 'Apellido2', 1, 0, 'C');
+        $pdf->Cell(30, 10, 'Telefono', 1, 0, 'C');
+        $pdf->Cell(30, 10, 'Username', 1, 1, 'C');
+        // Last cell with line break
+
+        $pdf->SetFont('Arial', '', 8);
+        // Set font for data rows
+
+        $query = "SELECT * from albergue.anfitrion;";
+        $table = $mysqli->query($query);
+
+        while ($row = $table->fetch_assoc()) {
+            $pdf->Cell(20, 10, $row['DNI'], 1, 0);
+            $pdf->Cell(30, 10, $row['Nombre'], 1, 0);
+            $pdf->Cell(30, 10, $row['Apellido1'], 1, 0);
+            $pdf->Cell(30, 10, $row['Apellido2'], 1, 0);
+            $pdf->Cell(30, 10, $row['Telefono'], 1, 0);
+            $pdf->Cell(30, 10, $row['Usuario'], 1, 1);
+        }
+    }
+
+    if ($_GET['pdf'] == 'mascotas') {
+        $pdf->Cell(20, 10, 'ID', 1, 0, 'C');
+        // Header cell (width, height, text, border, line break, alignment)
+        $pdf->Cell(30, 10, 'Nombre', 1, 0, 'C');
+        $pdf->Cell(30, 10, 'Raza', 1, 0, 'C');
+        $pdf->Cell(30, 10, 'Tamanio', 1, 0, 'C');
+        $pdf->Cell(30, 10, 'FechaNacimiento', 1, 0, 'C');
+        $pdf->Cell(30, 10, 'Descripcion', 1, 1, 'L');
+        // Last cell with line break
+
+        $pdf->SetFont('Arial', '', 8);
+        // Set font for data rows
+
+        $query = "SELECT * from albergue.mascota;";
+        $table = $mysqli->query($query);
+
+        while ($row = $table->fetch_assoc()) {
+            $pdf->Cell(20, 10, $row['ID'], 1, 0);
+            $pdf->Cell(30, 10, $row['Nombre'], 1, 0);
+            $pdf->Cell(30, 10, $row['Raza'], 1, 0);
+            $pdf->Cell(30, 10, $row['Tamanio'], 1, 0);
+            $pdf->Cell(30, 10, $row['FechaNacimiento'], 1, 0);
+            $pdf->Cell(30, 10, $row['Descripcion'], 1, 1);
+        }
+    }
+    $pdf->Output('data_export.pdf', 'D');
 }

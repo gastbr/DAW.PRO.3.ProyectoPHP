@@ -30,6 +30,39 @@ function FooterHTML()
 <?php
 }
 
+function anfitrion_ModalesMascota($row, $rowAnfitrion)
+{
+?>
+    <div class="modal fade" id="modalMascotaInfo<?php echo $row['ID']; ?>" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5"><?php echo $row['Nombre']; ?> (ID #<?php echo $row['ID']; ?>)</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img class="img-fluid rounded" src="../../mediabd/<?php echo $row['Foto']; ?>">
+                    <ul class="list-group my-4">
+                        <li class="list-group-item">Raza: <strong><?php echo $row['Raza']; ?></strong></li>
+                        <li class="list-group-item">Tamaño: <strong><?php echo $row['Tamanio']; ?></strong></li>
+                        <li class="list-group-item">Fecha de nacimiento: <strong class="fecha"><?php echo $row['FechaNacimiento']; ?></strong></li>
+                        <li class="list-group-item">Sexo: <strong><?php echo $row['Sexo']; ?></strong></li>
+                        <li class="list-group-item">Localización: <strong><?php echo ucfirst($row['Localizacion']); ?></strong></li>
+                        <li class="list-group-item">Descripción: <strong><?php echo $row['Descripcion']; ?></strong></li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <p>Fecha de registro: <strong><?php echo $row['FechaRegistro']; ?></strong></p>
+                    <button type="button" class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#modalMascotaBaja<?php echo $row['ID']; ?>">Baja</button>
+                    <button type="button" class="btn btn-success mx-1" data-bs-toggle="modal" data-bs-target="#modalMascotaEditar<?php echo $row['ID']; ?>">Editar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php
+}
+
 function admin_ModalesMascota($row, $rowAnfitrion)
 {
 ?>
@@ -319,4 +352,5 @@ function admin_ModalesAnfitrion($row)
 
 <?php
 }
+
 ?>

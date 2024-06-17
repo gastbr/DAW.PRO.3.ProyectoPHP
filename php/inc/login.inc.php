@@ -33,7 +33,7 @@ if (isset($_GET['session'])) {
         } else if ($checkLogin && $checkAdmin == 'Anfitrión') {
             $_SESSION['user'] = $user;
             $_SESSION['admin'] = false;
-            header("Location: ../admin/inicio_anfitrion.php");
+            header("Location: ../anfitrion/inicio_anfitrion.php");
             exit();
         } else {
             echo "Error de login.<br><br>login.inc.php";
@@ -47,5 +47,6 @@ if (isset($_GET['session'])) {
         session_unset();
         session_destroy();
         header('Location: ../index.php?session=logoutok');
+        exit();
     }
 }

@@ -1,8 +1,9 @@
 <?php
-session_start();
 include 'inc/func.inc.php';
 include 'inc/mysql.inc.php';
 HeadHTML();
+session_start();
+$_SESSION['loc'] = "login";
 $query = "SELECT * FROM albergue.mascota;";
 $table = $mysqli->query($query);
 $infoMascota = $table->fetch_assoc();
@@ -13,7 +14,7 @@ if (isset($_SESSION['user'])) {
         header("Location: admin/inicio_admin.php");
         exit();
     } else {
-        header("Location: admin/inicio_anfitrion.php");
+        header("Location: anfitrion/inicio_anfitrion.php");
         exit();
     }
 }
