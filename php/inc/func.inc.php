@@ -30,7 +30,7 @@ function FooterHTML()
 <?php
 }
 
-function ModalesMascota()
+function admin_ModalesMascota($row, $rowAnfitrion)
 {
 ?>
     <div class="modal fade" id="modalMascotaInfo<?php echo $row['ID']; ?>" tabindex="-1" aria-hidden="true">
@@ -161,7 +161,7 @@ function ModalesMascota()
 <?php
 }
 
-function ModalesAnfitrion()
+function admin_ModalesAnfitrion($row)
 {
 ?>
     <div class="modal fade" id="modalAnfitrionInfo<?php echo $row['DNI']; ?>" tabindex="-1" aria-hidden="true">

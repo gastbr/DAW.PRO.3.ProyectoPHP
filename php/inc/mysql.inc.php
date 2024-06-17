@@ -100,7 +100,7 @@ if (isset($_GET["mascota"]) && $_GET["mascota"] == "editar") {
             Descripcion = nullif('$descripcionMascota', '')
         WHERE id = $id;";
     $mysqli->query($query);
-    header("Location: ../admin/inicio_admin.php");
+    header("Location: ../admin/inicio_admin.php?modMascota=$id");
     exit();
 }
 

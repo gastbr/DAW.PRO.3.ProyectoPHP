@@ -17,8 +17,9 @@ if ($_SESSION['admin']) {
         <a href="../inc/login.inc.php?session=logout" type="button" class="btn btn-danger">Cerrar la sesión</a>
     </div>
 
-    <span class="bajaMascota text-danger fw-bold d-none">Baja realizada con éxito: ID#<?php echo $_GET['bajaMascota']; ?></span>
-    <span class="bajaAnfitrion text-danger fw-bold d-none">Baja realizada con éxito: DNI <?php echo $_GET['bajaAnfitrion']; ?></span>
+    <span id="bajaMascota" class="text-danger fw-bold d-none">Baja realizada con éxito: ID#<?php echo $_GET['bajaMascota']; ?></span>
+    <span id="bajaAnfitrion" class="text-danger fw-bold d-none">Baja realizada con éxito: DNI <?php echo $_GET['bajaAnfitrion']; ?></span>
+    <span id="modMascota" class="text-danger fw-bold d-none">Mascota modificada con éxito: ID# <?php echo $_GET['modMascota']; ?></span>
 
     <div class="d-block">
         <form class="formulario" action="inicio_admin.php?busca=mascota" method="post">
@@ -70,7 +71,7 @@ if ($_SESSION['admin']) {
                             </td>
                         </tr>
 
-                        <?php ModalesMascota(); ?>
+                        <?php admin_ModalesMascota(); ?>
 
                         <script>
                             // Poner la imagen de "imagen no disponible" en las entradas sin foto
@@ -122,11 +123,8 @@ if ($_SESSION['admin']) {
                         </td>
                     </tr>
 
-                    <!-- Modales anfitrión -->
+                    <?php admin_ModalesAnfitrion(); ?>
 
-                    <?php ModalesAnfitrion(); ?>
-
-                    <!-- Fin modal -->
             <?php
                 }
             }
